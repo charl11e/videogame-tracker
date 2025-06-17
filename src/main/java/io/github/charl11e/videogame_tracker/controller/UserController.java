@@ -2,13 +2,17 @@ package io.github.charl11e.videogame_tracker.controller;
 
 import io.github.charl11e.videogame_tracker.dto.UserRequest;
 import io.github.charl11e.videogame_tracker.dto.UserResponse;
+import io.github.charl11e.videogame_tracker.dto.GameResponse;
 
+import io.github.charl11e.videogame_tracker.exception.ResourceNotFoundException;
 import io.github.charl11e.videogame_tracker.model.User;
+import io.github.charl11e.videogame_tracker.model.Game;
 import io.github.charl11e.videogame_tracker.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -50,5 +54,28 @@ public class UserController {
         }
 
         return userResponses;
+    }
+
+    // Return all games associated with a user ID
+    @GetMapping("/{userid}/games")
+    public List<GameResponse> getGames(@PathVariable Long userid) {
+        Optional<User> checkUser = userRepository.findById(userid);
+        if (checkUser.isEmpty()) {
+            throw new ResourceNotFoundException("User ID not found");
+        }
+
+        User user = checkUser.get();
+        List<GameResponse> gameResponses = new ArrayList<>();
+
+        for (Game game : user.getGames()) {
+            GameResponse response = new GameResponse();
+            response.setId(game.getId());
+            response.setTitle(game.getTitle());
+            response.setPlatform(game.getPlatform());
+            response.setUsername(user.getUsername());
+            gameResponses.add(response);
+        }
+
+        return gameResponses;
     }
 }

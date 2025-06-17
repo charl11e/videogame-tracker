@@ -3,10 +3,12 @@ package io.github.charl11e.videogame_tracker.controller;
 import io.github.charl11e.videogame_tracker.dto.GameRequest;
 import io.github.charl11e.videogame_tracker.dto.GameResponse;
 
+import io.github.charl11e.videogame_tracker.exception.ResourceNotFoundException;
 import io.github.charl11e.videogame_tracker.model.Game;
 import io.github.charl11e.videogame_tracker.model.User;
 import io.github.charl11e.videogame_tracker.repository.GameRepository;
 import io.github.charl11e.videogame_tracker.repository.UserRepository;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class GameController {
         // Lookup user
         Optional<User> optionalUser = userRepository.findById(gameRequest.getUserID());
         if (optionalUser.isEmpty()) {
-            throw new RuntimeException("User not found");
+            throw new ResourceNotFoundException("User ID not found");
         }
 
         User user = optionalUser.get();

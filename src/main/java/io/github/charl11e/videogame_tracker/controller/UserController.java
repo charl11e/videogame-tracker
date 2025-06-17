@@ -8,6 +8,7 @@ import io.github.charl11e.videogame_tracker.exception.ResourceNotFoundException;
 import io.github.charl11e.videogame_tracker.model.User;
 import io.github.charl11e.videogame_tracker.model.Game;
 import io.github.charl11e.videogame_tracker.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class UserController {
 
     // Add new user
     @PostMapping
-    public UserResponse addUser(@RequestBody UserRequest userRequest) {
+    public UserResponse addUser(@Valid @RequestBody UserRequest userRequest) {
         User user = new User();
 
         // Save user

@@ -8,7 +8,7 @@ import io.github.charl11e.videogame_tracker.model.Game;
 import io.github.charl11e.videogame_tracker.model.User;
 import io.github.charl11e.videogame_tracker.repository.GameRepository;
 import io.github.charl11e.videogame_tracker.repository.UserRepository;
-import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class GameController {
 
     // Create new game
     @PostMapping
-    public GameResponse addGame(@RequestBody GameRequest gameRequest) {
+    public GameResponse addGame(@Valid @RequestBody GameRequest gameRequest) {
         // Lookup user
         Optional<User> optionalUser = userRepository.findById(gameRequest.getUserID());
         if (optionalUser.isEmpty()) {

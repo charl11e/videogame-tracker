@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
+@Table(name = "games")
 @Data
 public class Game {
 
@@ -13,4 +14,7 @@ public class Game {
 
     private String title;
     private String platform;
+
+    @ManyToOne
+    private User user;
 }

@@ -79,4 +79,15 @@ public class UserController {
 
         return gameResponses;
     }
+
+    // Delete user (will also delete all games associated with user too )
+    @DeleteMapping("/{userid}")
+    public void deleteUser(@PathVariable Long userid) {
+        Optional<User> user = userRepository.findById(userid);
+        if (user.isEmpty()) {
+            throw new ResourceNotFoundException("User not found");
+        } else {
+            userRepository.delete(user.get());
+        }
+    }
 }

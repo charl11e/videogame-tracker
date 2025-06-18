@@ -74,4 +74,19 @@ public class GameController {
         return gameResponses;
     }
 
+    // Delete game
+    @DeleteMapping("/{id}")
+    public void deleteGame(@PathVariable Long id) {
+        Optional<Game> game = gameRepository.findById(id);
+        if (game.isEmpty()) {
+            throw new ResourceNotFoundException("Game not found");
+        } else {
+            gameRepository.delete(game.get());
+        }
+
+    }
+
+    // Update game
+
+
 }

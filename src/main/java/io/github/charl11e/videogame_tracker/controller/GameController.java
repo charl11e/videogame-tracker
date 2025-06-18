@@ -87,6 +87,34 @@ public class GameController {
     }
 
     // Update game
+    @PutMapping("/{id}")
+    public GameResponse updateGame(@PathVariable Long id, @Valid @RequestBody GameRequest gameRequest) {
+        Optional<Game> game = gameRepository.findById(id);
+        if (game.isEmpty()) {
+            throw new ResourceNotFoundException("Game not found");
+        } else {
 
+           Optional<User> user = userRepository.findById(gameRequest.getUserID());
+           if (user.isEmpty()) {
+               throw new ResourceNotFoundException("User ID not found");
+           } else {
+
+               game.get().setTitle(gameRequest.getTitle());
+               game.get().setPlatform(gameRequest.getPlatform());
+               game.get().setUser(user.get());
+
+               Game updatedGame = gameRepository.save(game.get());
+
+               GameResponse response = new GameResponse();
+               response.setId(updatedGame.getId());
+               response.setTitle(updatedGame.getTitle());
+               response.setPlatform(updatedGame.getPlatform());
+               response.setUsername(updatedGame.getUser().getUsername());
+
+               return response;
+           }
+
+        }
+    }
 
 }

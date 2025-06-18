@@ -90,4 +90,22 @@ public class UserController {
             userRepository.delete(user.get());
         }
     }
+
+    // Update user
+    @PutMapping("/{userid}")
+    public UserResponse updateUser(@PathVariable Long userid, @Valid @RequestBody UserRequest userRequest) {
+        Optional<User> user = userRepository.findById(userid);
+        if (user.isEmpty()) {
+            throw new ResourceNotFoundException("User not found");
+        } else {
+            user.get().setUsername(userRequest.getUsername());
+            User updatedUser = userRepository.save(user.get());
+
+            UserResponse response = new UserResponse();
+            response.setId(updatedUser.getId());
+            response.setUsername(updatedUser.getUsername());
+
+            return response;
+        }
+    }
 }

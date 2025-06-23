@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000") // Can be removed after development
 @RestController
 @RequestMapping("/api/games")
 public class GameController {

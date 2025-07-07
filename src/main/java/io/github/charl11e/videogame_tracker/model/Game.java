@@ -23,4 +23,7 @@ public class Game {
     @Min(0)
     @Max(100)
     private Integer progress = 0;
+
+    @Enumerated(EnumType.STRING)
+    private GameStatus status;
 }

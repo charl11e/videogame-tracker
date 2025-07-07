@@ -45,6 +45,7 @@ public class GameController {
         game.setPlatform(gameRequest.getPlatform());
         game.setUser(user);
         game.setProgress(gameRequest.getProgress());
+        game.setStatus(gameRequest.getStatus());
 
         Game savedGame = gameRepository.save(game);
 
@@ -55,6 +56,7 @@ public class GameController {
         response.setPlatform(savedGame.getPlatform());
         response.setUsername(savedGame.getUser().getUsername());
         response.setProgress(savedGame.getProgress());
+        response.setStatus(savedGame.getStatus());
 
         return response;
     }
@@ -72,6 +74,7 @@ public class GameController {
             response.setPlatform(game.getPlatform());
             response.setUsername(game.getUser().getUsername());
             response.setProgress(game.getProgress());
+            response.setStatus(game.getStatus());
             gameResponses.add(response);
         }
 
@@ -107,7 +110,7 @@ public class GameController {
                game.get().setPlatform(gameRequest.getPlatform());
                game.get().setUser(user.get());
                game.get().setProgress(gameRequest.getProgress());
-
+               game.get().setStatus(gameRequest.getStatus());
                Game updatedGame = gameRepository.save(game.get());
 
                GameResponse response = new GameResponse();
@@ -116,6 +119,7 @@ public class GameController {
                response.setPlatform(updatedGame.getPlatform());
                response.setUsername(updatedGame.getUser().getUsername());
                response.setProgress(updatedGame.getProgress());
+               response.setStatus(updatedGame.getStatus());
 
                return response;
            }

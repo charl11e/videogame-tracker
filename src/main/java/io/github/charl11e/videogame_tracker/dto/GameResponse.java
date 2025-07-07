@@ -8,4 +8,5 @@ public class GameResponse {
     private String title;
     private String platform;
     private String username;
+    private Integer progress;
 }

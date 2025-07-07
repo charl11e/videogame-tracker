@@ -11,4 +11,7 @@ public class GameRequest {
     private String platform;
     @NotNull(message = "Must provide a user ID")
     private Long userID;
+    @Min(value = 0, message = "Progress must be at least 0")
+    @Max(value = 100, message = "Progress must be less than 100")
+    private Integer progress;
 }

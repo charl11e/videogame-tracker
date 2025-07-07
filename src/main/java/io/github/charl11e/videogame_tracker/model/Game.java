@@ -1,6 +1,8 @@
 package io.github.charl11e.videogame_tracker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 @Entity
@@ -17,4 +19,8 @@ public class Game {
 
     @ManyToOne
     private User user;
+
+    @Min(0)
+    @Max(100)
+    private Integer progress = 0;
 }

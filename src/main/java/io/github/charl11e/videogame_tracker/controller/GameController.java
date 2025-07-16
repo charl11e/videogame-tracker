@@ -12,6 +12,9 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -92,6 +95,17 @@ public class GameController {
         if (game.isEmpty()) {
             throw new ResourceNotFoundException("Game not found");
         } else {
+
+            // Delete game cover
+            if (game.get().getCoverImage() != null && !game.get().getCoverImage().isEmpty()) {
+                Path coverPath = Paths.get("uploads").resolve(game.get().getCoverImage());
+                try {
+                    Files.deleteIfExists(coverPath);
+                } catch (IOException e) {
+                    throw new RuntimeException("Failed to delete image cover for game" + e.getMessage());
+                }
+
+            }
             gameRepository.delete(game.get());
         }
 

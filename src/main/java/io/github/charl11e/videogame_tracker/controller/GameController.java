@@ -139,7 +139,11 @@ public class GameController {
             throw new ResourceNotFoundException("Game not found");
         } else {
 
-
+            // Check uploaded file is image
+            String contentType = file.getContentType();
+            if (contentType == null || !contentType.startsWith("image/")) {
+                throw new IllegalArgumentException("Only image files are allowed to be uploaded");
+            }
 
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
             String uploadDir = "uploads/";

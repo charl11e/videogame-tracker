@@ -77,6 +77,7 @@ public class UserController {
             response.setUsername(user.getUsername());
             response.setStatus(game.getStatus());
             response.setProgress(game.getProgress());
+            response.setCoverImage(game.getCoverImage());
             gameResponses.add(response);
         }
 

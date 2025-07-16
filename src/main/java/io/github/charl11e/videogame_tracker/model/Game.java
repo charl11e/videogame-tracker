@@ -26,4 +26,6 @@ public class Game {
 
     @Enumerated(EnumType.STRING)
     private GameStatus status;
+
+    private String coverImage; // "/uploads/<filename>"
 }

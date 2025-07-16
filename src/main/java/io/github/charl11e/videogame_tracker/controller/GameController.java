@@ -10,10 +10,13 @@ import io.github.charl11e.videogame_tracker.repository.GameRepository;
 import io.github.charl11e.videogame_tracker.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
 
 @CrossOrigin(origins = "http://localhost:3000") // Can be removed after development
 @RestController
@@ -75,6 +78,7 @@ public class GameController {
             response.setUsername(game.getUser().getUsername());
             response.setProgress(game.getProgress());
             response.setStatus(game.getStatus());
+            response.setCoverImage(game.getCoverImage());
             gameResponses.add(response);
         }
 
@@ -124,6 +128,46 @@ public class GameController {
                return response;
            }
 
+        }
+    }
+
+    // Update game art
+    @PutMapping("/{id}/cover")
+    public GameResponse updateGameCover(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        Optional<Game> game = gameRepository.findById(id);
+        if (game.isEmpty()) {
+            throw new ResourceNotFoundException("Game not found");
+        } else {
+
+
+
+            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            String uploadDir = "uploads/";
+            File uploadPath = new File(uploadDir);
+            if (!uploadPath.exists()) {
+                uploadPath.mkdirs();
+            }
+
+            try {
+                File destFile = new File(uploadDir + fileName);
+                file.transferTo(destFile);
+                game.get().setCoverImage("/" + uploadDir + fileName);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to store file", e);
+            }
+
+            Game updatedGame = gameRepository.save(game.get());
+
+            GameResponse response = new GameResponse();
+            response.setId(updatedGame.getId());
+            response.setCoverImage(updatedGame.getCoverImage());
+            response.setProgress(updatedGame.getProgress());
+            response.setTitle(updatedGame.getTitle());
+            response.setPlatform(updatedGame.getPlatform());
+            response.setUsername(updatedGame.getUser().getUsername());
+            response.setStatus(updatedGame.getStatus());
+
+            return response;
         }
     }
 

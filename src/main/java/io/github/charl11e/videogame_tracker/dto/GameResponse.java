@@ -11,4 +11,5 @@ public class GameResponse {
     private String username;
     private Integer progress;
     private GameStatus status;
+    private String coverImage;
 }

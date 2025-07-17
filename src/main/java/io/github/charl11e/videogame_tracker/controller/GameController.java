@@ -98,7 +98,8 @@ public class GameController {
 
             // Delete game cover
             if (game.get().getCoverImage() != null && !game.get().getCoverImage().isEmpty()) {
-                Path coverPath = Paths.get("uploads").resolve(game.get().getCoverImage());
+                Path coverPath = Paths.get(System.getProperty("user.dir") + File.separator + "uploads",
+                                           Paths.get(game.get().getCoverImage()).getFileName().toString());
                 try {
                     Files.deleteIfExists(coverPath);
                 } catch (IOException e) {
@@ -160,16 +161,16 @@ public class GameController {
             }
 
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            String uploadDir = "uploads/";
+            String uploadDir = System.getProperty("user.dir") + File.separator + "uploads";
             File uploadPath = new File(uploadDir);
             if (!uploadPath.exists()) {
                 uploadPath.mkdirs();
             }
 
             try {
-                File destFile = new File(uploadDir + fileName);
+                File destFile = new File(uploadDir + File.separator + fileName);
                 file.transferTo(destFile);
-                game.get().setCoverImage("/" + uploadDir + fileName);
+                game.get().setCoverImage("/uploads/" + fileName);
             } catch (IOException e) {
                 throw new RuntimeException("Failed to store file", e);
             }

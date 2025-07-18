@@ -98,8 +98,7 @@ public class GameController {
 
             // Delete game cover
             if (game.get().getCoverImage() != null && !game.get().getCoverImage().isEmpty()) {
-                Path coverPath = Paths.get(System.getProperty("user.dir") + File.separator + "uploads",
-                                           Paths.get(game.get().getCoverImage()).getFileName().toString());
+                Path coverPath = Paths.get(System.getProperty("user.dir") + File.separator + "uploads", Paths.get(game.get().getCoverImage()).getFileName().toString());
                 try {
                     Files.deleteIfExists(coverPath);
                 } catch (IOException e) {

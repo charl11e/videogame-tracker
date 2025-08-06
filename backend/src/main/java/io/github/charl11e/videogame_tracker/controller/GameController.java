@@ -21,7 +21,6 @@ import java.util.Optional;
 import java.io.File;
 import java.io.IOException;
 
-@CrossOrigin(origins = "http://localhost:3000") // Can be removed after development
 @RestController
 @RequestMapping("/api/games")
 public class GameController {

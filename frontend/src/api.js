@@ -62,7 +62,7 @@ export const addGame = async (game) => {
 
 export const delGame = async (id) => {
     try {
-        return await API.delete('/games' + id);
+        return await API.delete('/games/' + id);
     } catch (err) {
         throw getApiErrorMessage(err);
     }

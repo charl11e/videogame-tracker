@@ -17,6 +17,12 @@ The application can be run either using Docker (recommended) or natively using:
 - node.js (v20+)
 - Java (v21+) with Maven
 
+### Clone the repository
+```sh
+git clone https://github.com/charl11e/videogame-tracker
+cd videogame-tracker
+```
+
 ### Running with Docker
 1. Build and start the containers:
 ```sh

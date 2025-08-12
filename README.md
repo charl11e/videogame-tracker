@@ -62,4 +62,4 @@ The frontend handles all API requests for normal use of the app, however you can
 - [Documentation](https://documenter.getpostman.com/view/33001241/2sB3BDHq7U)
 
 ### License
-[MIT](license.md)
+[MIT](LICENSE.md)

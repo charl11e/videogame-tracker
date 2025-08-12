@@ -13,7 +13,7 @@ public class GameRequest {
     @NotNull(message = "Must provide a user ID")
     private Long userID;
     @Min(value = 0, message = "Progress must be at least 0")
-    @Max(value = 100, message = "Progress must be less than 100")
+    @Max(value = 100, message = "Progress must be at most 100")
     private Integer progress;
     @NotNull(message = "Must provide a status")
     private GameStatus status;

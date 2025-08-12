@@ -8,7 +8,7 @@ function FilterButton({
 
 }) {
 
-    const [isOpen, setOpen] = new useState(false);
+    const [isOpen, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function FilterButton({
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         }
-    })
+    }, [])
 
     function checkboxToggle(status) {
         if (filter.includes(status)) {

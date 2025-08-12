@@ -36,7 +36,7 @@ function ProgressModal({
                     Completion: {updatedProgress}%
                 </label>
                 <input id="progress" type="range" min="0" max="100" step="5" className={`w-full ${getSliderColour(updatedProgress)}`} value={updatedProgress}
-                onChange={(e) => setUpdatedProgress(e.target.value)}></input>
+                onChange={(e) => setUpdatedProgress(Number(e.target.value))}></input>
 
                 <label htmlFor="status-selector" className="block text-xl font-medium text-gray-700">
                     Status:

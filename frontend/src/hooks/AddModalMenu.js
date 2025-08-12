@@ -14,7 +14,7 @@ function useAddModal() {
 
     // Add user use states
     const [showAddUserModal, setShowAddUserModal] = useState(false);
-    const [newUsername, setNewUsername] = useState("User");
+    const [newUsername, setNewUsername] = useState("");
 
     // Close modals
     const addModalRef = useRef(null);

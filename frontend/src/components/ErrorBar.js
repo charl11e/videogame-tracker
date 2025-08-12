@@ -1,6 +1,9 @@
 function ErrorBar({
     errorMessage
 }) {
+    if (!errorMessage) {
+        return null;
+    }
     return (
         <div className="w-full z-[9999]">
             {errorMessage && (

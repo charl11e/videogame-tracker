@@ -53,7 +53,7 @@ function AddGameModal({
                     Completion: {newGameProgress}%
                 </label>
                 <input id="progress" type="range" min="0" max="100" step="5" className={`w-full ${getSliderColour(newGameProgress)}`} value={newGameProgress}
-                onChange={(e) => setNewGameProgress(e.target.value)}></input>
+                onChange={(e) => setNewGameProgress(Number(e.target.value))}></input>
 
                 <label htmlFor="status-selector" className="block text-xl font-medium text-gray-700">Status:</label>
                 <select id="status" value={newGameStatus} className="block w-full mb-4 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg"
@@ -74,7 +74,7 @@ function AddGameModal({
 
                     <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 font-semibold"
                     onClick={async () => {
-                        if (!newGameTitle || !newGamePlatform) {
+                        if (!newGameTitle.trim() || !newGamePlatform.trim()) {
                             setErrorMessage("Title and platform must not be blank")
                         } else {
                             try {

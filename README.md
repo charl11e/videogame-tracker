@@ -63,3 +63,7 @@ The frontend handles all API requests for normal use of the app, however you can
 
 ### License
 [MIT](LICENSE.md)
+
+### Other Repositories
+- [Frontend Repository](https://github.com/charl11e/videogame-tracker-frontend)
+- [Backend Repository](https://github.com/charl11e/videogame-tracker-backend)
